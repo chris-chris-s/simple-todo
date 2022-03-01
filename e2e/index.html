@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="TODO APP" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="todo.js"></script>
+    <script src="todo_ui.js"></script>
+  </head>
+  <body>
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col"><h1 class="text-center">TODO APP</h1></div>
+      </div>
+      <form id="form-new-todo">
+        <div class="row mt-5">
+          <div class="col">
+            <label for="input-new-todo" class="form-label">Add Todo</label>
+            <input
+              type="text"
+              id="input-new-todo"
+              placeholder="Make the bed"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="row mt-2 justify-content-end">
+          <div class="col">
+            <button class="btn btn-primary">Add Todo to list</button>
+          </div>
+        </div>
+      </form>
+      <template id="template-todo"
+        ><li class="mt-2 p-2">
+          <div class="d-flex">
+            <span class="todo-name"></span>
+            <button
+              onclick="markAsDone(this.parentElement.firstElementChild.textContent)"
+              class="btn btn-secondary ms-1"
+              type="button"
+            >
+              Mark as done
+            </button>
+            <button
+              onclick="removeItem(this.parentElement.firstElementChild.textContent)"
+              class="btn btn-secondary ms-1"
+              type="button"
+            >
+              Remove
+            </button>
+          </div>
+        </li></template
+      >
+      <template id="special-todo"><li></li></template>
+      <ul id="ul-todo-list"></ul>
+    </div>
+  </body>
+</html>
