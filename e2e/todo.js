@@ -12,10 +12,11 @@ function TodoApp() {
  * @param {string} todoName
  * @returns {[]} List of Todos
  */
-TodoApp.prototype.addTodo = function (todoName) {
+TodoApp.prototype.addTodo = function (todoName, important = false) {
   this.todos.push({
     name: todoName,
     done: false,
+    important: important,
   });
   this._saveTodos();
   return this.todos;
@@ -57,7 +58,7 @@ TodoApp.prototype.addImportantTodo = function (todoName) {
   if (!todoName.includes("!")) {
     throw new Error("Important Todo needs to include a !");
   } else {
-    this.addTodo(todoName);
+    this.addTodo(todoName, true);
   }
 };
 

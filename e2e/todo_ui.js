@@ -5,7 +5,11 @@ const addTodoSubmit = () => {
   document.querySelector("#form-new-todo").addEventListener("submit", (e) => {
     e.preventDefault();
     const todoToAdd = document.querySelector("#input-new-todo")?.value;
-    uiTodo.addTodo(todoToAdd);
+    if (todoToAdd.includes("!")) {
+      uiTodo.addImportantTodo(todoToAdd, true);
+    } else {
+      uiTodo.addTodo(todoToAdd);
+    }
     renderTodos();
   });
 };
@@ -16,7 +20,7 @@ const renderTodos = () => {
     ulList.firstChild.remove();
   }
 
-  uiTodo._getTodos().forEach((todo) => {
+  uiTodo._getTodos()?.forEach((todo) => {
     const liTodo = document
       .querySelector("#template-todo")
       .content.cloneNode(true);
@@ -25,6 +29,9 @@ const renderTodos = () => {
       liTodo
         .querySelector(".todo-name")
         .classList.add("bg-success", "text-white");
+    }
+    if (todo.important) {
+      liTodo.querySelector(".todo-name").classList.add("todo-important");
     }
     ulList.appendChild(liTodo);
   });
