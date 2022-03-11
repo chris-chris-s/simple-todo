@@ -9,8 +9,12 @@
     <script src="todo.js"></script>
     <script src="todo_ui.js"></script>
     <style>
+      .hidden {
+        display: none;
+      }
+
       .todo-important::before {
-        content: "🤩";
+        content: '🤩';
       }
     </style>
   </head>
@@ -23,17 +27,21 @@
         <div class="row mt-5">
           <div class="col">
             <label for="input-new-todo" class="form-label">Add Todo</label>
-            <input
-              type="text"
-              id="input-new-todo"
-              placeholder="Make the bed"
-              class="form-control"
-            />
+            <input type="text" id="input-new-todo" placeholder="Make the bed" class="form-control" />
           </div>
         </div>
         <div class="row mt-2 justify-content-end">
           <div class="col">
             <button class="btn btn-primary">Add Todo to list</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary js-show-important">Show important TODOs</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary js-show-done">Show Done TODOs</button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-primary js-show-all">Show ALL TODOs</button>
           </div>
         </div>
       </form>

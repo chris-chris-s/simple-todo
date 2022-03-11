@@ -3,7 +3,8 @@
  * @constructor
  */
 function TodoApp() {
-  this.todos = this._getTodos() ?? []; // start with empty todos
+  // start with empty todos or list of saved todos
+  this.todos = this._getTodos() ?? [];
 }
 
 /**
@@ -25,14 +26,14 @@ TodoApp.prototype.addTodo = function (todoName, important = false) {
 /**
  * 'private' function to save items to localstorage
  */
-TodoApp.prototype._saveTodos = function (key = "todos") {
+TodoApp.prototype._saveTodos = function (key = 'todos') {
   window.localStorage.setItem(key, JSON.stringify(this.todos));
 };
 
 /**
  * 'private' function to get todos from localstorage
  */
-TodoApp.prototype._getTodos = function (key = "todos") {
+TodoApp.prototype._getTodos = function (key = 'todos') {
   return JSON.parse(window.localStorage.getItem(key));
 };
 
@@ -42,21 +43,19 @@ TodoApp.prototype._getTodos = function (key = "todos") {
  * @param {string} todoName
  */
 TodoApp.prototype.removeTodo = function (todoName) {
-  this.todos = this.todos.filter((todo) => todo.name !== todoName);
+  this.todos = this.todos.filter(todo => todo.name !== todoName);
   this._saveTodos();
   return this.todos;
 };
 
 /**
- * Adds a Important todo to list
- * TODO: Add mark for important todo?
+ * Adds an Important todo to list
  *
  * @param {string} todoName
- * @returns {*}
  */
 TodoApp.prototype.addImportantTodo = function (todoName) {
-  if (!todoName.includes("!")) {
-    throw new Error("Important Todo needs to include a !");
+  if (!todoName.includes('!')) {
+    throw new Error('Important Todo needs to include a !');
   } else {
     this.addTodo(todoName, true);
   }
@@ -68,7 +67,7 @@ TodoApp.prototype.addImportantTodo = function (todoName) {
  * @param {todoName} todoName
  */
 TodoApp.prototype.markAsDone = function (todoName) {
-  this.todos.forEach((todo) => {
+  this.todos.forEach(todo => {
     if (todo.name === todoName) {
       todo.done = true;
     }
@@ -80,15 +79,17 @@ TodoApp.prototype.markAsDone = function (todoName) {
 /**
  * Shows Done Tasks
  *
+ * @returns {[]} List of Todos
  */
 TodoApp.prototype.showDoneTasks = function () {
-  return this.todos.filter((todo) => todo.done === true);
+  return this.todos.filter(todo => todo.done === true);
 };
 
 /**
- * Show's all important tasks.
+ * Shows all important tasks.
  *
+ * @returns {[]} List of Todos
  */
 TodoApp.prototype.showImportantTasks = function () {
-  // TODO: TDD
+  return this.todos.filter(todo => todo.important === true);
 };
